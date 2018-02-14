@@ -50,13 +50,13 @@
 \section*{Exercise 1}
 \desc{Show that templates don't result in `code bloat'}
 
-A function template \texttt{add} and a union \texttt{PointerUnion} were defined in separate header files. We use this union to print the address of a function. There are two source files, one for \texttt{fun} and one for \texttt{main}. The function \texttt{fun}, which includes \texttt{add.h}, instantiates \texttt{add} for \texttt{int}s and prints its address. Then, in \texttt{main} the same happens and \texttt{fun} is called. When the two source files of \texttt{fun} and \texttt{main} are compiled to object modules, they both contain an instantiation of \texttt{add}. Then they are linked to obtain an executable. The output of this executable gives two identical addresses, which means that only one instantiation of \texttt{add} is present. So the linker prevents 'code bloat'.
+A function template \texttt{add} and a union \texttt{PointerUnion} were defined in separate header files. We use this union to print the address of the function \texttt{add}. There are two source files, one for \texttt{fun} and one for \texttt{main}. The function \texttt{fun}, which includes \texttt{add.h}, instantiates \texttt{add} for \texttt{int}s and prints its address. Then, in \texttt{main} the same happens and \texttt{fun} is called. When the two source files of \texttt{fun} and \texttt{main} are compiled to object modules, they both contain an instantiation of \texttt{add}. Then they are linked to obtain an executable. The output of this executable gives two identical addresses, which means that only one instantiation of \texttt{add} is present. So the linker prevents 'code bloat'.
 
 
 \lstinputlisting[title=\texttt{add.h}]{../ex1/add.h}
 \lstinputlisting[title=\texttt{pointerunion.h}]{../ex1/pointerunion.h}
-\lstinputlisting[title=\texttt{main.cc}]{../ex1/main.cc}
 \lstinputlisting[title=\texttt{fun.cc}]{../ex1/fun.cc}
+\lstinputlisting[title=\texttt{main.cc}]{../ex1/main.cc}
 
 \clearpage
 
