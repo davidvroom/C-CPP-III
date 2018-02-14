@@ -1,0 +1,87 @@
+\documentclass[12pt]{article}
+\usepackage[left=1in, right=1in]{geometry}
+
+\usepackage{url}
+
+%\usepackage{arydshln}
+
+\usepackage{graphicx}
+
+\usepackage{color}
+\definecolor{light-gray}{gray}{0.30}
+
+\usepackage{verbatim}
+
+\usepackage{listings}
+\lstset{
+	frame=leftline,
+	frameround=ttff,
+	numbers=left,
+	language=C++,
+	showstringspaces=False,
+	extendedchars=False,
+	numberstyle=\footnotesize,
+	basicstyle=\small\ttfamily,
+	commentstyle=\color{light-gray}\slshape,
+	belowskip=1.5em,
+	aboveskip=1.5em,
+	fontadjust,
+	tabsize=4,		%added for proper tab alligning
+	xleftmargin=0cm,
+	xrightmargin=0cm
+}
+
+
+\newcommand{\desc}[1]{\textit{#1} \vspace{1em}}
+
+\title{\itshape Exercises week 1: Function Templates}
+
+\author{
+	Klaas Isaac Bijlsma \\ s2394480
+	\and
+	David Vroom \\ s2309939
+}
+
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\section*{Exercise 1}
+\desc{Show that templates don't result in `code bloat'}
+
+A function template \texttt{add} and a union \texttt{PointerUnion} were defined in separate header files. We use this union to print the address of a function. There are two source files, one for \texttt{fun} and one for \texttt{main}. The function \texttt{fun}, which includes \texttt{add.h}, instantiates \texttt{add} for \texttt{int}s and prints its address. Then, in \texttt{main} the same happens and \texttt{fun} is called. When the two source files of \texttt{fun} and \texttt{main} are compiled to object modules, they both contain an instantiation of \texttt{add}. Then they are linked to obtain an executable. The output of this executable gives two identical addresses, which means that only one instantiation of \texttt{add} is present. So the linker prevents 'code bloat'.
+
+
+\lstinputlisting[title=\texttt{add.h}]{../ex1/add.h}
+\lstinputlisting[title=\texttt{pointerunion.h}]{../ex1/pointerunion.h}
+\lstinputlisting[title=\texttt{main.cc}]{../ex1/main.cc}
+\lstinputlisting[title=\texttt{fun.cc}]{../ex1/fun.cc}
+
+\clearpage
+
+\section*{Exercise 2}
+\desc{}
+
+
+\clearpage
+
+\section*{Exercise 3}
+\desc{}
+
+
+\clearpage
+
+\section*{Exercise 4}
+\desc{}
+
+
+\clearpage
+
+\section*{Exercise 5}
+\desc{}
+
+
+\clearpage
+
+\end{document}
