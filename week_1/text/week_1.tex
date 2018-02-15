@@ -50,7 +50,7 @@
 \section*{Exercise 1}
 \desc{Show that templates don't result in `code bloat'}
 
-A function template \texttt{add} and a union \texttt{PointerUnion} were defined in separate header files. We use this union to print the address of the function \texttt{add}. There are two source files, one for \texttt{fun} and one for \texttt{main}. The function \texttt{fun}, which includes \texttt{add.h}, instantiates \texttt{add} for \texttt{int}s and prints its address. Then, in \texttt{main} the same happens and \texttt{fun} is called. When the two source files of \texttt{fun} and \texttt{main} are compiled to object modules, they both contain an instantiation of \texttt{add}. Then they are linked to obtain an executable. The output of this executable gives two identical addresses, which means that only one instantiation of \texttt{add} is present. So the linker prevents 'code bloat'.
+A function template \texttt{add} and a union \texttt{PointerUnion} were defined in separate header files. We use this union to print the address of the function \texttt{add}. There are two source files, one for \texttt{fun} and one for \texttt{main}. The function \texttt{fun}, which includes \texttt{add.h}, instantiates \texttt{add} for \texttt{int}s and prints its address. Then, in \texttt{main} the same happens and \texttt{fun} is called. When the two source files of \texttt{fun} and \texttt{main} are compiled to object modules, they both contain an instantiation of \texttt{add}. Then they are linked to obtain an executable. The output of this executable gives two identical addresses, which means that only one instantiation of \texttt{add} is present. So it can be concluded that the linker prevents 'code bloat'.
 
 
 \lstinputlisting[title=\texttt{add.h}]{../ex1/add.h}
@@ -60,6 +60,7 @@ A function template \texttt{add} and a union \texttt{PointerUnion} were defined 
 
 \clearpage
 
+
 \section*{Exercise 2}
 \desc{Learn to embed a function template in a function template}
 
@@ -68,20 +69,23 @@ We used the following code,
 \lstinputlisting[title=\texttt{as.h}]{../ex2/as.h}
 \lstinputlisting[title=\texttt{main.cc}]{../ex2/main.cc}
 
-
-
 \clearpage
+
 
 \section*{Exercise 3}
-\desc{}
+\desc{Learn to construct a generic index operator}
 
+We used the following code,
+
+\lstinputlisting[title=\texttt{storage.h}]{../ex3/storage/storage.h}
 
 \clearpage
+
 
 \section*{Exercise 4}
 \desc{Learn to design and use a function template}
 
-We used the following code,
+The code below is based on the solution of exercise 48 of part II of the C++ course.
 
 \lstinputlisting[title=\texttt{exception/exception.h}]{../ex4/exception/exception.h}
 \lstinputlisting[title=\texttt{exception/exception.ih}]{../ex4/exception/exception.ih}
@@ -97,6 +101,41 @@ We used the following code,
 
 \lstinputlisting[title=\texttt{forwarder/forwarder.h}]{../ex5/forwarder/forwarder.h}
 \lstinputlisting[title=\texttt{main.cc}]{../ex5/main.cc}
+
+
+\clearpage
+
+\section*{Exercise 7}
+\desc{Gain some experience with the function selection mechanism}
+
+\lstinputlisting[title=\texttt{source}]{../ex7/opdracht.txt}
+
+\textbf{Why is the scope resolution operator required when calling \texttt{max()}?}\\
+Apparantly, there is another function template for a function \texttt{max} in the header file \texttt{iostream}, that also expects two arguments that are a \texttt{const \&} to the same formal type. The function selection mechanism will find a draw between this template function and ours on all criteria and therefore end the process with an ambiguity. To specify that we call the function \texttt{max} for which we defined a template above \texttt{main}, we need the scope resolution operator.
+
+\textbf{When compiling this function the compiler complains with a message like:
+\texttt{max.cc:13: error: no matching function for call to 'max(double, int)'}    
+Why doesn't the compiler generate a \texttt{max(double, double)} function in this case?}\\
+The standard conversion from \texttt{int} to \texttt{double} is only allowed for template non-type parameters. It is not part of the three allowed types of parameter type transformations. Since we deal with template type parameters, it is not possible.
+
+\textbf{Assume we add a function 
+\texttt{double max(double const \&left, double const \&right)}
+to the source. Explain why this solves the problem.}\\
+Now we have added a normal function (not a function template), for which the compiler is allowed to make the implicit conversion from \texttt{int} to \texttt{double} to fit the arguments to the parameters.
+
+\textbf{Assume we would then call \texttt{::max('a', 12)}. Which \texttt{max()} function is then used and why? }\\
+Now again the normal, non-template function is used. Both arguments are converted to a \texttt{double}.
+
+\textbf{Remove the additional \texttt{max} function. Without using casts or otherwise changing the argument list of the function call \texttt{max(3.5, 4)}, how can we get the compiler to compile the source properly? }\\
+By calling \texttt{::max<double>(3.5, 4)}.
+
+\textbf{Specify a general characteristic of the answer to the previous question (i.e., can the approach always be used or are there certain limitations?). }\\
+This only works if a standard conversion exists to convert the arguments to the type that is specified between pointy brackets. 
+
+
+
+
+
 
 
 \clearpage

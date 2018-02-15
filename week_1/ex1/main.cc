@@ -7,7 +7,7 @@ void fun();
 int main()
 {
 	PointerUnion pu = { add };
+	std::cout << pu.vp << '\n';
 
 	fun();
-	std::cout << pu.vp << '\n';
 }
