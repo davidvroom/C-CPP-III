@@ -1,3 +1,6 @@
+// Type should have defined an operator+= for a std::string and Type
+// A specialization is made for Type == int 
+
 #ifndef INCLUDED_EXCEPTION_
 #define INCLUDED_EXCEPTION_
 
@@ -21,6 +24,13 @@ template <typename Type>
 inline Exception &&operator<<(Exception &&in, Type const &txt)
 {
     in.d_what += txt;
+    return std::move(in);
+}
+
+template <>
+inline Exception &&operator<<<int>(Exception &&in, int const &integer)
+{
+    in.d_what += std::to_string(integer);
     return std::move(in);
 }
 

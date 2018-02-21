@@ -1,6 +1,8 @@
+#ifndef INCLUDED_STORAGE_
+#define INCLUDED_STORAGE_
+
 #include <vector>
 #include <initializer_list>
-
 
 class Storage
 {
@@ -33,3 +35,5 @@ inline Storage::Storage(std::initializer_list<size_t> const &list)
 :
     d_data(list)
 {}
+
+#endif

@@ -1,6 +1,10 @@
-template <typename Type1, typename Type2>
+#ifndef INCLUDED_AS_
+#define INCLUDED_AS_
 
-Type1 as(Type2 const &value)
+template <typename newType, typename oldType>
+newType as(oldType &&value)
 {
-	return static_cast<Type1>(value);
+	return static_cast<newType>(value);
 }
+
+#endif 

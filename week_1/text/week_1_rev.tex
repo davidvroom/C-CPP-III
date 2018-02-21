@@ -1,0 +1,118 @@
+\documentclass[12pt]{article}
+\usepackage[left=1in, right=1in]{geometry}
+
+\usepackage{url}
+
+%\usepackage{arydshln}
+
+\usepackage{graphicx}
+
+\usepackage{color}
+\definecolor{light-gray}{gray}{0.30}
+
+\usepackage{verbatim}
+
+\usepackage{listings}
+\lstset{
+	frame=leftline,
+	frameround=ttff,
+	numbers=left,
+	language=C++,
+	showstringspaces=False,
+	extendedchars=False,
+	numberstyle=\footnotesize,
+	basicstyle=\small\ttfamily,
+	commentstyle=\color{light-gray}\slshape,
+	belowskip=1.5em,
+	aboveskip=1.5em,
+	fontadjust,
+	tabsize=4,		%added for proper tab alligning
+	xleftmargin=0cm,
+	xrightmargin=0cm
+}
+
+
+\newcommand{\desc}[1]{\textit{#1} \vspace{1em}}
+
+\title{\itshape Exercises week 1: Function Templates - Revision}
+
+\author{
+	Klaas Isaac Bijlsma \\ s2394480
+	\and
+	David Vroom \\ s2309939
+}
+
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\section*{Exercise 1}
+\desc{Show that templates don't result in `code bloat'}
+
+\textbf{In the first attempt we forgot to include the guards in the header files. This is now fixed.}
+
+A function template \texttt{add} and a union \texttt{PointerUnion} were defined in separate header files. We use this union to print the address of the function \texttt{add}. There are two source files, one for \texttt{fun} and one for \texttt{main}. The function \texttt{fun}, which includes \texttt{add.h}, instantiates \texttt{add} for \texttt{int}s and prints its address. Then, in \texttt{main} the same happens and \texttt{fun} is called. When the two source files of \texttt{fun} and \texttt{main} are compiled to object modules, they both contain an instantiation of \texttt{add}. Then they are linked to obtain an executable. The output of this executable gives two identical addresses, which means that only one instantiation of \texttt{add} is present. So it can be concluded that the linker prevents 'code bloat'.
+
+
+\lstinputlisting[title=\texttt{add.h}]{../ex1/add.h}
+\lstinputlisting[title=\texttt{pointerunion.h}]{../ex1/pointerunion.h}
+\lstinputlisting[title=\texttt{fun.cc}]{../ex1/fun.cc}
+\lstinputlisting[title=\texttt{main.cc}]{../ex1/main.cc}
+
+\clearpage
+
+
+\section*{Exercise 2}
+\desc{Learn to embed a function template in a function template}
+
+\textbf{In the first attempt we forgot to include the guards in the header files. This is now fixed. Also our formal typenames were not too informative, this is changed. Most importantly, we altered the parameter type of \texttt{value}.}
+
+We used the following code,
+
+\lstinputlisting[title=\texttt{as.h}]{../ex2/as.h}
+\lstinputlisting[title=\texttt{main.cc}]{../ex2/main.cc}
+
+\clearpage
+
+
+\section*{Exercise 3}
+\desc{Learn to construct a generic index operator}
+
+\textbf{In the first attempt we forgot to include the guards in the header file. This is now fixed.}
+
+We used the following code,
+
+\lstinputlisting[title=\texttt{storage.h}]{../ex3/storage/storage.h}
+
+\clearpage
+
+
+\section*{Exercise 4}
+\desc{Learn to design and use a function template}
+
+\textbf{In the first attempt we didn't document that an operator+= is needed for \texttt{std::string} and \texttt{Type}. This is now fixed. We also added a specialization for \texttt{Type == int}.}
+
+The code below is based on the solution of exercise 48 of part II of the C++ course.
+
+\lstinputlisting[title=\texttt{exception/exception.h}]{../ex4/exception/exception.h}
+\lstinputlisting[title=\texttt{exception/what.cc}]{../ex4/exception/what.cc}
+
+\clearpage
+
+\section*{Exercise 5}
+\desc{Learn to design a generic function template}
+
+\textbf{In the first attempt we forgot to include the guards in the header files. This is now fixed.}
+
+We used the following code,
+
+\lstinputlisting[title=\texttt{forwarder/forwarder.h}]{../ex5/forwarder/forwarder.h}
+\lstinputlisting[title=\texttt{main.cc}]{../ex5/main.cc}
+
+
+\clearpage
+
+\clearpage
+
+\end{document}
