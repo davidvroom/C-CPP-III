@@ -6,8 +6,9 @@ using namespace std;
 int main(int argc, char **argv)
 try
 {
+	string str = "I'm a string";
     throw Exception{} << "insert anything that's ostream-insertable: "
-                         "strings, values, " << argc << ", etc.";
+                      << str << argc << '!';
 }
 catch (exception const &ex)   
 {
