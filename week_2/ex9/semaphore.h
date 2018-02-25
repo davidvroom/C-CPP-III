@@ -16,7 +16,6 @@ class Semaphore
 		template <typename Function, typename ...Params>
 		bool wait(Function fun, Params &&...params);
 		//other members
-
 };
 
 template <typename Function, typename ...Params>
