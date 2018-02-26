@@ -5,8 +5,8 @@
 
 using namespace std;
 
-int main(int argc, char const **argv)
+int main()
 {
-	cout << IntValue{};
-	cout << DoubleValue{};
+	cout << IntValue{} << '\n';
+	cout << DoubleValue{} << '\n';
 }

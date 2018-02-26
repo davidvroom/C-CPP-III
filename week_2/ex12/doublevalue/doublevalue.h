@@ -6,13 +6,13 @@
 
 class DoubleValue: public Base<DoubleValue>
 {
-	double d_doubleValue = 10.81;
+	friend Base<DoubleValue>;
 
-	private:
-		std::ostream &insertInto(std::ostream &out);
+	double d_doubleValue = 10.81;
+	std::ostream &insertInto(std::ostream &out) const;
 };
 
-std::ostream &DoubleValue::insertInto(std::ostream &out)
+std::ostream &DoubleValue::insertInto(std::ostream &out) const
 {
 	return out << d_doubleValue;
 }
