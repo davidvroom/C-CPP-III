@@ -3,7 +3,8 @@
 
 #include <iomanip>
 
-class ABC;
+//class ABC;
+#include "../abc/abc.h"
 
 class Process
 {
@@ -20,6 +21,8 @@ Process::Process(ABC &&abc)
 {}
 
 inline void Process::execute()
-{}
+{
+	d_abc.interface();
+}
 
 #endif
