@@ -4,7 +4,7 @@
 #include "../base/base.h"
 #include <iostream>
 
-class IntValue: public Base<int>
+class IntValue: public Base<IntValue>
 {
 	int d_intValue = 100;
 	std::ostream &insertInto(std::ostream &out);

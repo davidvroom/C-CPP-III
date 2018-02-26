@@ -6,7 +6,7 @@
 template <class Derived>
 class Base
 {
-	friend std::ostream &operator<<(std::ostream &out, Base<Derived> const &base);		
+	friend std::ostream &operator<<<Derived>(std::ostream &out, Base<Derived> const &base);		
 };
 
 template <class Derived>

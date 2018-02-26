@@ -4,7 +4,7 @@
 #include "../base/base.h"
 #include <iostream>
 
-class DoubleValue: public Base<double>
+class DoubleValue: public Base<DoubleValue>
 {
 	double d_doubleValue = 10.81;
 
