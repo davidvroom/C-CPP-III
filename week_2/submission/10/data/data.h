@@ -13,15 +13,9 @@ class Data
 
     public:
     	typedef std::string value_type;		// needed for back_inserter
-		//typedef value_type const &const_reference;
 
         void push_back(std::string const &str);
-        std::string get(size_t idx) const;		// for testing
 };
 
-inline std::string Data::get(size_t idx) const
-{
-	return *d_data[idx];
-}
 
 #endif

@@ -1,0 +1,1 @@
+We got stuck in this exercise, and would like some advice. In particular, we don't know how interface should call run. For part 1, we used a static cast to make both options of the ternary operator of the same type. Then for part 2, the code is commented since the compiler warns about returning a r-value reference. 
