@@ -5,5 +5,5 @@ Matrix<DataType>::Matrix(Matrix<DataType> const &other)
     d_nCols(other.d_nCols),
     d_data(new DataType[size()])
 {
-    memcpy(d_data, other.d_data, size() *sizeof(DataType));
+    memcpy(d_data, other.d_data, size() * sizeof(DataType));
 }
