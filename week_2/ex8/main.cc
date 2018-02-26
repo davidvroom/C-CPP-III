@@ -23,7 +23,7 @@ int main()
 
 	Matrix<double> Dag(2,2);
 
-	Dag = Hai + matrix;
+	Dag = Hai + matrix + Hai;
 
 	//Matrix<double> matrix2{move(matrix)};
 
@@ -32,6 +32,7 @@ int main()
 	cout << Hai;
 	cout << Dag;
 	cout << matrix;
+	cout << matrix[0][0];
 
 	cout << (Hai != matrix);
 }
