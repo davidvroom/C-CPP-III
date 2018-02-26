@@ -1,0 +1,6 @@
+#include "abc.h"
+
+inline void ABC::interface()
+{
+	run();
+}

@@ -17,11 +17,6 @@ class ABC
 		virtual void run() = 0;
 };
 
-inline void ABC::interface()
-{
-	run();
-}
-
 template <typename Type, typename ...Params>
 ABC &&ABC::make(Params &&...params)
 {
