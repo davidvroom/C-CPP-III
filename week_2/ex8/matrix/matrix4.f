@@ -10,7 +10,7 @@ try
     for (auto &list: iniList)
     {
         if (list.size() != d_nCols)
-            throw std::out_of_range ("Matrix(IniList): varying number of elements in rows\n");
+            throw std::out_of_range("Matrix(IniList): varying number of elements in rows\n");
 
         memcpy(ptr, &*list.begin() , list.size() * sizeof(DataType));
         ptr += list.size();
