@@ -1,7 +1,6 @@
-#include "derived1.h"
-#include <iostream>
+#include "derived1.ih"
 
 void Derived1::run()
 {
-	std::cout << "run called from Derived1\n";
+	cout << "run called from Derived1\n";
 }

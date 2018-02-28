@@ -4,17 +4,12 @@
 #include <vector>
 #include <iterator>
 
-#include <string>
-
 template <typename Data>
 class Storage
 {
 	std::vector<Data *> d_storage;
 
 	public:
-		Storage();
-		// the usual stuff goes here
-
 		class iterator: public 
 				std::iterator<std::random_access_iterator_tag, Data>
 		{
@@ -51,6 +46,7 @@ class Storage
 		Storage<Data>::reverse_iterator rend();
 };
 
+	// implementations of member functions of Storage<Data>::iterator
 template <typename Data>
 inline Storage<Data>::iterator::iterator(
 		 typename std::vector<Data *>::iterator const &current)
@@ -59,39 +55,45 @@ inline Storage<Data>::iterator::iterator(
 {}
 
 template <typename Data>
-inline typename Storage<Data>::iterator &Storage<Data>::iterator::operator++()
+inline typename Storage<Data>::iterator &
+					Storage<Data>::iterator::operator++()
 {
 	++d_current;
 	return *this;
 }
 
 template <typename Data>
-inline typename Storage<Data>::iterator Storage<Data>::iterator::operator++(int)
+inline typename Storage<Data>::iterator 
+					Storage<Data>::iterator::operator++(int)
 {
 	return iterator(d_current++);
 }
 
 template <typename Data>
-inline typename Storage<Data>::iterator &Storage<Data>::iterator::operator--()
+inline typename Storage<Data>::iterator &
+					Storage<Data>::iterator::operator--()
 {
 	--d_current;
 	return *this;
 }
 
 template <typename Data>
-inline typename Storage<Data>::iterator Storage<Data>::iterator::operator--(int)
+inline typename Storage<Data>::iterator 
+					Storage<Data>::iterator::operator--(int)
 {
 	return iterator(d_current--);
 }
 
 template <typename Data>
-inline typename Storage<Data>::iterator Storage<Data>::iterator::operator+(int step) const
+inline typename Storage<Data>::iterator 
+					Storage<Data>::iterator::operator+(int step) const
 {
 	return iterator(d_current + step);
 }
 
 template <typename Data>
-inline typename Storage<Data>::iterator Storage<Data>::iterator::operator-(int step) const
+inline typename Storage<Data>::iterator 
+					Storage<Data>::iterator::operator-(int step) const
 {
 	return iterator(d_current - step);
 }
@@ -132,7 +134,7 @@ inline Data *Storage<Data>::iterator::operator->() const
 	return *d_current;
 }
 
-
+	// implementations of member functions of Storage<Data>
 template <typename Data>
 inline typename Storage<Data>::iterator Storage<Data>::begin()
 {
@@ -155,15 +157,6 @@ template <typename Data>
 inline typename Storage<Data>::reverse_iterator Storage<Data>::rend()
 {
 	return reverse_iterator(d_storage.begin());
-}
-
-template <typename Data>
-inline Storage<Data>::Storage()
-{
-	d_storage.push_back(new std::string("bb"));
-	d_storage.push_back(new std::string("aa"));
-	d_storage.push_back(new std::string("cc"));
-
 }
 
 #endif

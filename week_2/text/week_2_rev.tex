@@ -1,0 +1,100 @@
+\documentclass[12pt]{article}
+\usepackage[left=1in, right=1in]{geometry}
+
+\usepackage{url}
+
+%\usepackage{arydshln}
+
+\usepackage{graphicx}
+
+\usepackage{color}
+\definecolor{light-gray}{gray}{0.30}
+
+\usepackage{verbatim}
+
+\usepackage{listings}
+\lstset{
+	frame=leftline,
+	frameround=ttff,
+	numbers=left,
+	language=C++,
+	showstringspaces=False,
+	extendedchars=False,
+	numberstyle=\footnotesize,
+	basicstyle=\small\ttfamily,
+	commentstyle=\color{light-gray}\slshape,
+	belowskip=1.5em,
+	aboveskip=1.5em,
+	fontadjust,
+	tabsize=4,		%added for proper tab alligning
+	xleftmargin=0cm,
+	xrightmargin=0cm
+}
+
+
+\newcommand{\desc}[1]{\textit{#1} \vspace{1em}}
+
+\title{\itshape Exercises week 2: Class Templates - Revision}
+
+\author{
+	Klaas Isaac Bijlsma \\ s2394480
+	\and
+	David Vroom \\ s2309939
+}
+
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\section*{Exercise 9}
+\desc{Learn to design a member template'}
+
+\textbf{In the first attempt we forgot to decrement \texttt{d\_nAvailable} when required.}
+
+We used the following code,
+
+\lstinputlisting[title=\texttt{semaphore.h}]{../ex9/semaphore.h}
+
+\clearpage
+
+
+\section*{Exercise 13}
+\desc{Learn to create a generic constructor for a virtual base class}
+
+\textbf{In the first attempt our return statement of the \texttt{make} function was incorrect. We added \texttt{std::move}.}
+
+We used the following code,
+
+\lstinputlisting[title=\texttt{abc/abc.h}]{../ex13/abc/abc.h}
+\lstinputlisting[title=\texttt{abc/destructor.cc}]{../ex13/abc/destructor.cc}
+\lstinputlisting[title=\texttt{abc/interface.cc}]{../ex13/abc/interface.cc}
+\lstinputlisting[title=\texttt{derived1/derived1.h}]{../ex13/derived1/derived1.h}
+\lstinputlisting[title=\texttt{derived1/derived1.ih}]{../ex13/derived1/derived1.ih}
+\lstinputlisting[title=\texttt{derived1/derived1.cc}]{../ex13/derived1/derived1.cc}
+\lstinputlisting[title=\texttt{derived1/run.cc}]{../ex13/derived1/run.cc} 
+\lstinputlisting[title=\texttt{derived2/derived2.h}]{../ex13/derived2/derived2.h}
+\lstinputlisting[title=\texttt{derived2/derived2.ih}]{../ex13/derived2/derived2.ih}
+\lstinputlisting[title=\texttt{derived2/derived2.cc}]{../ex13/derived2/derived2.cc}
+\lstinputlisting[title=\texttt{derived2/run.cc}]{../ex13/derived2/run.cc} 
+\lstinputlisting[title=\texttt{process/process.h}]{../ex13/process/process.h}
+\lstinputlisting[title=\texttt{main.cc}]{../ex13/main.cc}   
+
+\clearpage
+
+\section*{Exercise 14}
+\desc{Learn to add iterators to a class}
+
+\textbf{This is the first attempt.}
+
+Since the iterators have to be passed to the \texttt{sort} generic algorithm, the iterators are of iterator type \texttt{random\_access\_iterator}.
+
+We used the following code,
+
+\lstinputlisting[title=\texttt{storage.h}]{../ex14/storage.h}
+
+
+\clearpage
+
+
+\end{document}

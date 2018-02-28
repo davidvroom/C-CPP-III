@@ -9,13 +9,13 @@ int main()
     Storage<std::string> storage;
 
     sort(storage.begin(), storage.end());
-    std::cout << *storage.begin() << ' '
-    	 << *++storage.begin() << ' '
-    	 << *++++storage.begin() << '\n';
+    // std::cout << *storage.begin() << ' '
+    // 	 << *++storage.begin() << ' '
+    // 	 << *(storage.begin() + 2) << '\n';
 
     sort(storage.rbegin(), storage.rend());
-    std::cout << *storage.begin() << ' '
-    	 << *++storage.begin() << ' '
-    	 << *++++storage.begin() << '\n';
+    // std::cout << *storage.begin() << ' '
+    // 	 << *++storage.begin() << ' '
+    // 	 << *++++storage.begin() << '\n';
 }
 

@@ -12,5 +12,4 @@ class Derived1: public ABC
     	void run() override;
 };
 
-
 #endif

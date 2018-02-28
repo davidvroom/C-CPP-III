@@ -1,7 +1,6 @@
-#include "derived1.h"
-#include <iostream>
+#include "derived1.ih"
 
 Derived1::Derived1(std::ostream &out)
 {
-	std::cout << "Derived1 constructed\n";
+	cout << "Derived1 constructed\n";
 }

@@ -14,12 +14,12 @@ class Semaphore
 
 	public:
 		template <typename Function, typename ...Params>
-		bool wait(Function fun, Params &&...params);
+		bool wait(Function &&fun, Params &&...params);
 		// other members
 };
 
 template <typename Function, typename ...Params>
-bool Semaphore::wait(Function fun, Params &&...params)
+bool Semaphore::wait(Function &&fun, Params &&...params)
 {
 	std::unique_lock<std::mutex> lk(d_mutex);
 	while (d_nAvailable == 0)
@@ -27,8 +27,11 @@ bool Semaphore::wait(Function fun, Params &&...params)
 
 	bool ret = fun(std::forward<Params>(params)...);
 
-	return !ret ? false :
-		   d_nAvailable == 0 ? false : true;
+	if (!ret || d_nAvailable == 0)
+		return false;
+	
+	--d_nAvailable;
+	return true;
 }
 
 #endif

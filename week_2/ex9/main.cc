@@ -1,4 +1,5 @@
 #include "semaphore.h"
+#include <iostream>
 
 bool fun(int num)
 {

@@ -1,8 +1,8 @@
 #ifndef INCLUDED_PROCESS_H_
 #define INCLUDED_PROCESS_H_
 
-#include <iomanip>		// std::move()
 #include "../abc/abc.h"
+#include <iomanip> // std::move()
 
 class Process
 {
@@ -10,7 +10,7 @@ class Process
 
     public:
         Process(ABC &&abc);
-        void execute();         // calls d_abc.interface()
+        void execute();        
 };
 
 Process::Process(ABC &&abc)
