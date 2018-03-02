@@ -4,16 +4,16 @@
 
 #include <cstddef>	// size_t
 
-// generic 
-template <size_t idx, typename Needle, typename Next, typename ...Params>
+// generic case
+template <size_t idx, typename Needle, typename Next, typename ...Rest>
 struct TypeIdx
 {
-	enum { position = TypeIdx<idx + 1, Needle, Params...>::position };
+	enum { position = TypeIdx<idx + 1, Needle, Rest...>::position };
 };
 
 // specialization for needle found somewhere in the middle of haystack
-template <size_t idx, typename Needle, typename ...Params>
-struct TypeIdx<idx, Needle, Needle, Params...>
+template <size_t idx, typename Needle, typename ...Rest>
+struct TypeIdx<idx, Needle, Needle, Rest...>
 {
 	enum { position = idx };
 };

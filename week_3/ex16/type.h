@@ -3,13 +3,13 @@
 
 #include "typeidx.h"
 
-template <typename Needle, typename ...Params>
+template <typename Needle, typename ...Haystack>
 struct Type
 {	
 	enum 
 	{ 
 		//located = sizeof ...(Params) - TypeIdx<Needle, Params...>::remaining
-		located = TypeIdx<1, Needle, Params...>::position
+		located = TypeIdx<1, Needle, Haystack...>::position
 	};	
 };
 
