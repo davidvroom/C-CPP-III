@@ -8,7 +8,8 @@ struct Type
 {	
 	enum 
 	{ 
-		located = sizeof ...(Params) - TypeIdx<Needle, Params...>::remaining
+		//located = sizeof ...(Params) - TypeIdx<Needle, Params...>::remaining
+		located = TypeIdx<1, Needle, Params...>::position
 	};	
 };
 
