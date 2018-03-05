@@ -1,24 +1,26 @@
+
 #ifndef INCLUDED_DISPLAY_H_
 #define INCLUDED_DISPLAY_H_
 
 #include <ostream>
 #include <cstddef>
 
-struct OneChar
+template<char First, char ...Rest>
+struct Chars
 {
-	enum { value = 'a' + 'b'};
+	enum { value = First };
 };
 
-template <bool selector, size_t DECIMAL, size_t BASE>
+template <bool selector, size_t DECIMAL, size_t BASE, char ...Rest>
 struct Display
 {
-	using Type = typename Display<true, DECIMAL, BASE>::Type;
+	using Type = typename Display<DECIMAL/BASE, DECIMAL, BASE, >::Type;
 };
 
-template <size_t DECIMAL, size_t BASE>
-struct Display<true, DECIMAL, BASE>
+template <size_t DECIMAL, size_t BASE, char ...Rest>
+struct Display<true, DECIMAL, BASE, Rest...>
 {
-	using Type = OneChar;
+	using Type = Chars<Rest...>;
 };
 
 

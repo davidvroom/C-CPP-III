@@ -3,11 +3,20 @@
 
 using namespace std;
 
-struct OneChar;
+template<char First, char ...Rest>
+struct Chars;
 
-ostream &operator<<(ostream &out, OneChar const &obj)
+template <char First, char ...Rest>
+ostream &operator<<(ostream &out, Chars<First, Rest...> const &enm)
 {
-	return out << obj.value ;
+	return out << char { Chars<First, Rest...>::value }
+			   << Chars<Rest... >{};
+}
+
+template <char Last>
+ostream &operator<<(ostream &out, Chars<Last> const &obj)
+{
+	return out << char { Chars<Last>::value };
 }
 
 int main()
