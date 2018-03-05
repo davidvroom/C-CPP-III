@@ -3,18 +3,13 @@
 
 #include <ostream>
 #include <cstddef>
+#include "display.h"
+
 
 template <size_t DECIMAL, size_t BASE>
 struct Convert
 {
-	struct CP
-	{};
+	using CP = typename Display<false, DECIMAL, BASE>::Type;
 };
-
-template <size_t DECIMAL, size_t BASE>
-std::ostream &operator<<(std::ostream &out, typename Convert<DECIMAL, BASE>::CP const &obj) 
-{
-	return out << "insertion operator"; 
-}
 
 #endif
