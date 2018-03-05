@@ -10,30 +10,35 @@ struct Chars
 	enum { value = First };
 };
 
-
-//template <bool selector, size_t DECIMAL, size_t BASE, char ...Rest>
-template <size_t DECIMAL, size_t BASE, char ...Acc>
+// Generic template
+template <bool IsNoDigit, size_t DECIMAL, size_t BASE, char ...Acc>
 struct Display
 {
-	using Type = typename Display<DECIMAL/BASE, BASE, DECIMAL % BASE, Acc...>::Type;
+	using Type = typename Display<((DECIMAL / BASE) % BASE) / 10, 
+							      DECIMAL / BASE, 
+							      BASE, 
+							      DECIMAL % BASE + 87, 
+							      Acc...
+						  		  >::Type;
 };
 
+// Specialization for the character to add being a digit
+template <size_t DECIMAL, size_t BASE, char ...Acc>
+struct Display<false, DECIMAL, BASE, Acc...>
+{
+	using Type = typename Display<((DECIMAL / BASE) % BASE) / 10, 
+								  DECIMAL / BASE, 
+								  BASE, 
+								  DECIMAL % BASE + 48, 
+								  Acc...
+								  >::Type;
+};
+
+// Specialization for ending recursion
 template <size_t BASE, char ...Acc>
-struct Display<0, BASE, Acc...>
+struct Display<false, 0, BASE, Acc...>
 {
 	using Type = Chars<Acc...>;
 };
-
-
-
-/*
-
-template <size_t DECIMAL, size_t BASE, char ...Rest>
-struct Display<true, DECIMAL, BASE, Rest...>
-{
-	using Type = Chars<Rest...>;
-};
-
-*/
 
 #endif
