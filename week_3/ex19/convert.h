@@ -9,7 +9,8 @@ template <size_t DECIMAL, size_t BASE>
 struct Convert
 {
 	//using CP = typename ::Chars<'c', '8', '1'>;
-	using CP = typename Display<false, DECIMAL, BASE>::Type;
+	//using CP = typename Display<false, DECIMAL, BASE>::Type;
+	using CP = typename Display<DECIMAL, BASE>::Type;
 };
 
 #endif
