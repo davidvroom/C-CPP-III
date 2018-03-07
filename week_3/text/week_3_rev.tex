@@ -1,0 +1,62 @@
+\documentclass[12pt]{article}
+\usepackage[left=1in, right=1in]{geometry}
+
+\usepackage{url}
+
+%\usepackage{arydshln}
+
+\usepackage{graphicx}
+
+\usepackage{color}
+\definecolor{light-gray}{gray}{0.30}
+
+\usepackage{verbatim}
+
+\usepackage{listings}
+\lstset{
+	frame=leftline,
+	frameround=ttff,
+	numbers=left,
+	language=C++,
+	showstringspaces=False,
+	extendedchars=False,
+	numberstyle=\footnotesize,
+	basicstyle=\small\ttfamily,
+	commentstyle=\color{light-gray}\slshape,
+	belowskip=1.5em,
+	aboveskip=1.5em,
+	fontadjust,
+	tabsize=4,		%added for proper tab alligning
+	xleftmargin=0cm,
+	xrightmargin=0cm
+}
+
+
+\newcommand{\desc}[1]{\textit{#1} \vspace{1em}}
+
+\title{\itshape Exercises week 3: Advanced Templates I - Revision}
+
+\author{
+	Klaas Isaac Bijlsma \\ s2394480
+	\and
+	David Vroom \\ s2309939
+}
+
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\section*{Exercise 18}
+\desc{Learn to design a small template meta program}
+
+\textbf{In the first attempt we used an extra struct to set the initial values of the template parameters that are necessary to do the computations. We solved this by adding default template parameters to the template header of \texttt{Bin}. We also noticed that we did not include the \texttt{cstddef} headerfile in \texttt{bin.h}. The program compiled properly, because of the \texttt{iostream} headerfile in \texttt{main}, but of course we cannot assume this. Therefore the \texttt{cstddef} headerfile is now included.}\\
+
+We used the following code,
+
+\lstinputlisting[title=\texttt{bin.h}]{../ex18/bin.h}
+\lstinputlisting[title=\texttt{main.cc}]{../ex18/main.cc}
+
+\clearpage
+
+\end{document}
