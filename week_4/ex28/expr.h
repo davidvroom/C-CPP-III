@@ -7,6 +7,8 @@
 #include "trait.h"
 #include <functional>	// arithmetic function objects
 
+size_t nIndices = 0;
+
 HDR_
 class Expr
 {
@@ -45,6 +47,8 @@ Expr_::operator VecType() const
 HDR_
 auto Expr_::operator[](size_t idx) const
 {
+	(nIndices += Trait<LHS>::isVector) += Trait<RHS>::isVector; 
+	
 	return Operation<value_type>{}(d_lhs[idx], d_rhs[idx]);
 }
 
