@@ -17,7 +17,6 @@ struct Trait<std::vector<InType>>
 {
 	typedef std::vector<InType> VecType;
 	enum { isVector = 1 };
-
 };
 
 #endif

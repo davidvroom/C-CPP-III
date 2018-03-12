@@ -14,9 +14,6 @@ int main()
 
     for (size_t idx = 0, end = iv1.size(); idx != end; ++idx)
         std::cout << iResult[idx] << '\n';
-
-    std::cout << nIndices << '\n';
-
     
     typedef std::vector<double> DVect;
     DVect dv1(10, 4.1);

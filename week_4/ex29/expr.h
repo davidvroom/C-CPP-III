@@ -8,6 +8,7 @@
 #include <functional>	// arithmetic function objects
 
 size_t nIndices = 0;
+size_t nOperations = 0;
 
 HDR_
 class Expr
@@ -48,7 +49,8 @@ HDR_
 auto Expr_::operator[](size_t idx) const
 {
 	(nIndices += Trait<LHS>::isVector) += Trait<RHS>::isVector; 
-	
+
+	++nOperations;
 	return Operation<value_type>{}(d_lhs[idx], d_rhs[idx]);
 }
 
