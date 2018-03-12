@@ -4,12 +4,15 @@
 						template <typename> class Operation>
 #define Expr_ Expr<LHS, RHS, Operation>
 
-#include "trait.h"
 #include <functional>	// arithmetic function objects
+#include <vector>
 
 HDR_
 class Expr
 {
+	template <typename ExprType>
+	struct Trait;
+
 	LHS const &d_lhs;
 	RHS const &d_rhs;
 
@@ -21,6 +24,22 @@ class Expr
 		operator VecType() const;
 		auto operator[](size_t idx) const;
 		size_t size() const;
+};
+
+// generic case for when LHS is Expr
+HDR_
+template <typename ExprType>
+struct Expr_::Trait
+{
+	typedef typename ExprType::VecType VecType;
+};
+
+// specialization for when LHS is a vector
+HDR_
+template<typename InType>
+struct Expr_::Trait<std::vector<InType>>
+{
+	typedef std::vector<InType> VecType;
 };
 
 HDR_

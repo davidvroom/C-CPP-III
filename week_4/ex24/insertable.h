@@ -12,7 +12,8 @@ struct Insertable: public Container<Type>
 };
 
 template<template <typename> class Container, typename Type>
-std::ostream &operator<<(std::ostream &out, Insertable<Container, Type> const &obj)
+std::ostream &operator<<(
+	std::ostream &out, Insertable<Container, Type> const &obj)
 {
 	for (size_t idx = 0, end = obj.size(); idx != end; ++idx)
 		out << obj[idx] << '\n';
