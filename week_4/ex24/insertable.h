@@ -8,7 +8,9 @@ struct Insertable: public Container<Type>
 {
 	Insertable() = default;
 	explicit Insertable(Container<Type> const &initCont);
+	explicit Insertable(Container<Type> &&initCont);
 	explicit Insertable(Type const &initDataEl);
+	explicit Insertable(Type &&initDataEl);
 };
 
 template<template <typename> class Container, typename Type>
