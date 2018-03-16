@@ -1,0 +1,9 @@
+//%class-name = "Scanner"
+%filenames = "scanner"
+%target-directory = "scanner"
+
+
+%%
+
+[a-zA-Z]+ 	return true;
+. 			//ignore
