@@ -1,0 +1,8 @@
+%target-directory = "scanner"
+
+WORD		[a-zA-Z]+
+
+%%
+
+{WORD}		return true;
+.|\n 		// ignore
