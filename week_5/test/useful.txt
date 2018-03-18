@@ -1,0 +1,52 @@
+Flexc++ User guide
+
+chapter 3: Format of the input file
+{
+	definitions
+	%%
+	rules
+	3.1: Definitions
+	{
+		Flexc++ supports command-line options and input-file directives controlling flexc++'s behavior.
+
+		The definitions section may also contain declarations of named regular expressions. A named regular expression looks like this:
+		name   pattern
+
+		Finally, the definitions section may be used to declare mini-scanners (a.k.a. start conditions)
+	}
+
+	3.2 Rules
+	{
+		pattern    action
+	}
+
+	3.4 Patterns
+	{
+		// lots of important stuff
+
+		r*	zero or more rs, where r is any regular expression;
+
+		r+	one or more rs;
+
+		r?	zero or one rs (that is, an optional r); 
+
+		r{m} where 0 <= m: match `r' exactly m times;
+
+
+		Named regular expressions have the same precedence as parenthesized regular expressions. So after
+			WORD  xyz[a-zA-Z]
+			%%
+			{WORD}{2}
+		the input xyzaxyzb is matched, whereas xyzab isn't. 
+	
+		In addition to characters and ranges of characters, character classes can also contain predefined character sets. These consist of certain names between [: and :] delimiters. The predefined character sets are:
+			[:alnum:] [:alpha:] [:blank:]
+			[:cntrl:] [:digit:] [:graph:]
+			[:lower:] [:print:] [:punct:]
+			[:space:] [:upper:] [:xdigit:]
+
+
+	}
+
+}
+	
