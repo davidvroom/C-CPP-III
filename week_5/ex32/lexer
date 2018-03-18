@@ -1,0 +1,6 @@
+%target-directory = "scanner"
+
+%%
+
+house/boat|hold		std::cout << matched() << '\n';
+.|\n 				//ignore

@@ -1,10 +1,4 @@
-#include <iostream>
-#include <set>
-#include <string>
-#include <fstream>
-#include "scanner/scanner.h"
-
-using namespace std;
+#include "main.ih"
 
 int main(int argc, char **argv)
 {
@@ -22,10 +16,8 @@ int main(int argc, char **argv)
 		}
 
 	else
-	{
 		while (scanner.lex())
 			container.insert(scanner.matched());
-	}
 
 	for (auto iter = container.begin(), end = container.end(); iter != end; ++iter)
 		cout << *iter << '\n'; 
