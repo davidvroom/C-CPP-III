@@ -1,5 +1,0 @@
-inline void Scanner::finish()
-{
-    int rc = std::rename((d_fileName + ".tmp").c_str(), d_fileName.c_st);
-    std::cout << rc << '\n';
-}

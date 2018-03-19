@@ -7,17 +7,21 @@
 
 %% 
 
-/* This substitute a (concatenated) string with a function call to grabbed() 
-   and saves the string in <filename>.gsl */
+/* The following substitutes a (concatenated) string with a function call 
+to grabbed() and saves the string in <filename>.gsl */
 
 \"							begin(StartCondition__::string);
 <string>\"					{
 								d_gsl << '\n';
-								out() << "grabbed(" << ++d_counter << ", \"" 
-								<< d_gslFileName << "\")";
+								out() << "grabbed(" 
+								      << ++d_counter 
+								      << ", \"" 
+								      << d_gslFileName 
+								      << "\")";
 								begin(StartCondition__::INITIAL);
 							}
-<string>\"[[:space:]]*\"	// ignore, to support string concatenation
+<string>\"[[:space:]]*\"	// ignore to support string concatenation
+//%nowarn
 <string>[^\"]*				d_gsl << matched();
 
 

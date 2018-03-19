@@ -1,0 +1,15 @@
+%target-directory = "scanner"
+%filenames = "scanner"
+
+using namespace ScannerToken;
+
+%%
+
+[[:blank:]]	    		// ignore 
+
+[a-zA-Z_][a-zA-Z_0-9]* 	return IDENT;
+[0-9]+					return INTEGRAL;
+[0-9]+\.[0-9]+			return DOUBLE;
+'[^[:space:]]'			return matched()[1];
+\n$						|
+.		 				return matched()[0];

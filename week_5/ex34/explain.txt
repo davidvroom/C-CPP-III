@@ -1,0 +1,8 @@
+We implemented most of the aspects of the exercise. 
+Our code handles the code snippets as required.
+However, we didn't know how to implement some aspects;
+i.e. to start our little program we use './main main.cc',
+instead of 'grab main.cc'. 
+Also we wanted to match EOF by <<EOF>> within 'lexer',
+and call our finish function (then we can make it private),
+but matching <<EOF>> does not seem to work.

@@ -1,11 +1,11 @@
 %target-directory = "scanner"
 %filenames = "scanner"
 
+%x 		eolComment
 %x		string
 %x		CComment
-%x		multiLine
 %x 		blankCComment
-%x 		eolComment
+%x		multiLine
 
 %%
 
@@ -44,11 +44,12 @@ in order to print the correct amount of blanks */
 								begin(StartCondition__::INITIAL);
 							}
 <blankCComment>.			// ignore
+
+/* When C comment is multiline, only one newline has to be kept */
 <blankCComment>\n			{
 								out() << matched();
 								begin(StartCondition__::multiLine);
 							}
 
-/* When C comment is multiline, only one newline has to be kept */
 <multiLine>"*/"[[:blank:]]*	begin(StartCondition__::INITIAL);
 <multiLine>.|\n				// ignore

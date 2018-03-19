@@ -1,0 +1,6 @@
+letter 1239 DAsd3d2d 
+en ander spul 
+en weer ander    spul
+Some chars: $3%^ #$ @
+and a double: 12.12
+'a' 'b' 'c'
