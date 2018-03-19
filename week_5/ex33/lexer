@@ -1,6 +1,54 @@
 %target-directory = "scanner"
+%filenames = "scanner"
+
+%x		string
+%x		CComment
+%x		multiLine
+%x 		blankCComment
+%x 		eolComment
 
 %%
 
-house/((boat|hold)[ \t\n])		std::cout << matched() << '\n';
-.|\n 						//ignore
+//%nowarn
+^[[:blank:]]+				// ignore initial blanks
+[[:blank:]]+$				// ignore trailing blanks
+
+/* Ignore rest of line after '//' and '#' */
+[[:blank:]]*"//"			begin(StartCondition__::eolComment);
+[[:blank:]]*"#"				begin(StartCondition__::eolComment);
+
+<eolComment>.				// ignore
+<eolComment>\n 				{
+								std::cout << '\n';
+								begin(StartCondition__::INITIAL);	
+							}	
+
+/* Within string everything is kept */
+\"							begin(StartCondition__::string);
+<string>\"					begin(StartCondition__::INITIAL);
+
+/* Discriminate between starting C comment with and without a blank 
+in order to print the correct amount of blanks */
+"/*" 						begin(StartCondition__::CComment);
+" /*"						begin(StartCondition__::blankCComment);
+
+<CComment>"*/"				begin(StartCondition__::INITIAL);
+<CComment>.					// ignore
+<CComment>\n				{
+								std::cout << '\n';
+								begin(StartCondition__::multiLine);
+							}
+
+<blankCComment>"*/"|"*/ "	{
+								std::cout << ' ';
+								begin(StartCondition__::INITIAL);
+							}
+<blankCComment>.			// ignore
+<blankCComment>\n			{
+								std::cout << '\n';
+								begin(StartCondition__::multiLine);
+							}
+
+/* When C comment is multiline, only one newline has to be kept */
+<multiLine>"*/"[[:blank:]]*	begin(StartCondition__::INITIAL);
+<multiLine>.|\n				// ignore
