@@ -10,7 +10,8 @@ enum ScannerToken
 {
     IDENT = 257,
     INTEGRAL,
-    DOUBLE
+    DOUBLE,
+    OPERATOR
 };
 
 // $insert classHead
