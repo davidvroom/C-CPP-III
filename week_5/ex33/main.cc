@@ -1,16 +1,12 @@
+#include <fstream>
 #include "scanner/scanner.h"
 
 using namespace std;
 
 int main()
-try
 {
-	Scanner scanner;
-
+	ifstream file{ "text.txt" };
+	Scanner scanner{ file };
 	while (scanner.lex())
 		;
-}
-catch (...)
-{
-	return 1;
 }

@@ -2,6 +2,6 @@
 
 %%
 
-house/((boat|hold)[ \t\n])	std::cout << "house" << '\n';
-[[:alpha:]]+				std::cout << matched() << '\n';
-.|\n 						//ignore
+house/((boat|hold)[[:space:]])		std::cout << matched() << '\n';
+[^[:space:]]+						std::cout << matched() << '\n';
+.|\n								// ignore
