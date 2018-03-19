@@ -11,7 +11,8 @@ enum ScannerToken
     IDENT = 257,
     INTEGRAL,
     DOUBLE,
-    OPERATOR
+    OPERATOR,
+    STRING
 };
 
 // $insert classHead
