@@ -1,0 +1,32 @@
+%target-directory = "scanner"
+%filenames = "scanner"
+
+%x string
+
+unaryOp			\+\+|--|\(\)|\[\]
+relationalOp	==|!=|\<=|\>=|&&|\|\| 
+assignOp		\+=|-=|\*=|\/=|%=|\>\>=|&=|\^=|\|=
+otherOp			::|-\>|\.\*|-\>\*|\<\<|\>\>
+
+%%
+
+[[:blank:]]	    				// ignore 
+
+/* This miniscanner doesn't work properly yet */
+\"								begin(StartCondition__::string);
+<string>.+/(\"[[:blank:]]*\n) 	{	
+									begin(StartCondition__::INITIAL);	
+									return STRING;
+								}
+
+
+{unaryOp}						|
+{relationalOp}					|
+{assignOp}						|
+{otherOp} 						return OPERATOR;
+[a-zA-Z_][a-zA-Z_0-9]* 			return IDENT;
+[0-9]+							return INTEGRAL;
+[0-9]+\.[0-9]+					return DOUBLE;
+'[^[:space:]]'					return matched()[1];
+\n$								|
+.		 						return matched()[0];
