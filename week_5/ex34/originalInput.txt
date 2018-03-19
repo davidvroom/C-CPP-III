@@ -1,0 +1,10 @@
+input
+regel 2
+cout << "dit is een string";
+cout << "en dit is nog één";
+cout << "en dit is een"
+		"concatenated string";
+hierna is een eolcomment // hallo " dag \n en dan nu echtt
+hjgk /* dit is een 
+multiline comment " en dit is geen string"
+wedhe d */ 

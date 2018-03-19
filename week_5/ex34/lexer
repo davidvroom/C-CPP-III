@@ -1,0 +1,43 @@
+%target-directory = "scanner"
+%filenames = "scanner"
+
+%x		string
+%x		eolComment
+%x		CComment
+
+%% 
+
+/* This substitute a (concatenated) string with a function call to grabbed() 
+   and saves the string in <filename>.gsl */
+
+\"							begin(StartCondition__::string);
+<string>\"					{
+								d_gsl << '\n';
+								out() << "grabbed(" << ++d_counter << ", \"" 
+								<< d_gslFileName << "\")";
+								begin(StartCondition__::INITIAL);
+							}
+<string>\"[[:space:]]*\"	// ignore, to support string concatenation
+<string>[^\"]*				d_gsl << matched();
+
+
+/* Everything within eol comment and c comment is inserted into the output file */
+
+"//"						{	
+								out() << matched();
+								begin(StartCondition__::eolComment);
+							}
+<eolComment>\n$				{
+								out() << matched();
+								begin(StartCondition__::INITIAL);
+							}
+"/*" 						{
+								out() << matched();
+								begin(StartCondition__::CComment);
+							}
+<CComment>"*/"$				{
+								out() << matched();
+								begin(StartCondition__::INITIAL);
+							}
+
+/* All characters not matched are inserted implicitely into the output file */

@@ -18,8 +18,8 @@
 [[:blank:]]*"#"				begin(StartCondition__::eolComment);
 
 <eolComment>.				// ignore
-<eolComment>\n 				{
-								std::cout << '\n';
+<eolComment>\n$				{
+								out() << matched();
 								begin(StartCondition__::INITIAL);	
 							}	
 
@@ -35,17 +35,17 @@ in order to print the correct amount of blanks */
 <CComment>"*/"				begin(StartCondition__::INITIAL);
 <CComment>.					// ignore
 <CComment>\n				{
-								std::cout << '\n';
+								out() << matched();
 								begin(StartCondition__::multiLine);
 							}
 
 <blankCComment>"*/"|"*/ "	{
-								std::cout << ' ';
+								out() << ' ';
 								begin(StartCondition__::INITIAL);
 							}
 <blankCComment>.			// ignore
 <blankCComment>\n			{
-								std::cout << '\n';
+								out() << matched();
 								begin(StartCondition__::multiLine);
 							}
 
