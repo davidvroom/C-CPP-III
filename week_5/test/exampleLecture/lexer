@@ -1,0 +1,8 @@
+%filenames = "scanner"
+%target-directory = "scanner"
+
+%%
+
+[0-9]+					return NUMBER;
+[a-zA-Z][a-zA-Z_0-9]+	return IDENT;
+.						return matched()[0];

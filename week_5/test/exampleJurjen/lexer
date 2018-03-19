@@ -1,8 +1,6 @@
-
-//%class-name = "Scanner"
 %filenames = "scanner"
 %target-directory = "scanner"
 
 %%
 
-[0-9]+		return 0;
+[a-zA-Z][a-zA-Z]+	std::cout << '[' << matched() << ']';
