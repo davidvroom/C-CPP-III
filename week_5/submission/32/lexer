@@ -1,0 +1,13 @@
+%target-directory = "scanner"
+%filenames = "scanner"
+
+/* The exercise defines a word as any consecutive series of 
+non-blank (we interpreted this as non-space) characters */
+
+WORD   							[^[:space:]]+
+
+%%
+
+house/((boat|hold)[[:space:]])	out() << matched() << '\n';
+{WORD}							out() << matched() << '\n';
+.|\n							// ignore

@@ -1,0 +1,6 @@
+%target-directory = "scanner"
+
+%%
+
+[[:alpha:]]+	return true;
+.|\n 			// ignore
