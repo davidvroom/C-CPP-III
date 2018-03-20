@@ -74,7 +74,7 @@ LIBNAME := $(PROJECT)
 
 # Any environment variables are extended, not replaced
 # So either edit here, or set in the environment
-CXXFLAGS += -Wall -std=c++17 -pthread
+CXXFLAGS += -Wall -std=c++17 -pthread -Werror
 LDFLAGS += -L.
 LDLIBS += -l$(LIBNAME)
 

@@ -1,0 +1,26 @@
+     a ...           s defewf wcr cw  			
+hoi klaas // dit moet worden verwijderd
+hoi david # dit moet ook worden verwijderd     
+hoi david en klaas /*  dit ook */    
+
+"hello /* dit moet niet weg */ world"
+0hello/* dit moet wel weg */world
+1hello/* dit moet wel weg */ world
+1hello /* dit moet wel weg */world
+1hello /* dit moet wel weg */ world
+3hello   /* dit moet wel weg */world
+3hello   /* dit moet wel weg */ world
+5hello   /* dit moet wel weg */   world
+
+
+
+
+
+This is a line /* containing
+        multi line dit moet weg
+comment */ and this is more
+
+ This is a line /* containing
+        multi line
+    comment dit resulteert in een single line gevolgd door een newline */
+    

@@ -1,4 +1,6 @@
 We implemented most of the aspects of the exercise. 
+We used the 'main.cc.tmp' approach for handling the 
+modification of an existing file.
 Our code handles the code snippets as required.
 However, we didn't know how to implement some aspects;
 i.e. to start our little program we use './main main.cc',
