@@ -12,7 +12,8 @@ enum ScannerToken
     INTEGRAL,
     DOUBLE,
     OPERATOR,
-    STRING
+    STRING,
+    CHARCONST
 };
 
 // $insert classHead
@@ -46,7 +47,8 @@ inline Scanner::Scanner(std::istream &in, std::ostream &out)
     ScannerBase(in, out)
 {}
 
-inline Scanner::Scanner(std::string const &infile, std::string const &outfile)
+inline Scanner::Scanner(
+    std::string const &infile, std::string const &outfile)
 :
     ScannerBase(infile, outfile)
 {}

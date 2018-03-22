@@ -2,12 +2,24 @@
 %filenames = "scanner"
 
 /* The exercise defines a word as any consecutive series of 
-non-blank (we interpreted this as non-space) characters */
+   non-blank (we interpreted this as non-space) characters */
 
-WORD   							[^[:space:]]+
+WORD   					[[:^space:]]+
+
+%x house
 
 %%
 
-house/((boat|hold)[[:space:]])	out() << matched() << '\n';
-{WORD}							out() << matched() << '\n';
-.|\n							// ignore
+house/boat|hold			{
+							out() << matched();
+							begin(StartCondition__::house);	
+						}	
+
+<house>boat|hold		{
+							out() << '\n' << matched() << '\n';
+							begin(StartCondition__::INITIAL);
+						}						
+
+{WORD}					out() << matched() << '\n';
+
+.|\n					// ignore

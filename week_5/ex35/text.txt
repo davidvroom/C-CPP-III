@@ -3,7 +3,7 @@ en ander spul
 en weer ander    spul
 Some chars: $3%^ #$ @
 and a double: 12.12
-'a' 'b' 'c'
+'a' 'b' 'c' '''
 x = 5;
 x += 3; x == 10;
 hoi::doei
@@ -13,5 +13,27 @@ hoi::doei
 otherOp			::|->|.*|->*|<<|>>
 */
 
-"string hiero " " one string "
-"andere string"
+'\007'
+
+12.2E+12
+
+'\xab'
+
+'\n'
+
+'\a'
+'\x1b2AF'
+'\xAF1a2'
+'\007'
+'\''
+'\\'
+
+"string 1"    "string 2 haii
+"string 3"
+
+12e+13
+12.12e+13
+12e12
+\n\n\n
+
+'\'' '\"' '\?' '\\'

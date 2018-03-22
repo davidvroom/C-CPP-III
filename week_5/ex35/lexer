@@ -1,32 +1,43 @@
 %target-directory = "scanner"
 %filenames = "scanner"
 
-%x string
-
 unaryOp			\+\+|--|\(\)|\[\]
 relationalOp	==|!=|\<=|\>=|&&|\|\| 
 assignOp		\+=|-=|\*=|\/=|%=|\>\>=|&=|\^=|\|=
 otherOp			::|-\>|\.\*|-\>\*|\<\<|\>\>
+			
+int 			[0-9]+				
+double			[0-9]*\.[0-9]+
+eDouble			({double}|{int})[Ee][\+-]?{int}
+
+escapeSeq 		'\\[abfnrtv'"?\\]'
+octal			'\\[0-7]+'
+hexadecimal 	'\\x[0-9a-fA-F]+'
+
+ident 			[a-zA-Z_][a-zA-Z_0-9]* 
 
 %%
 
-[[:blank:]]	    		// ignore 
+[[:blank:]]	    				// ignore 
 
-\"						begin(StartCondition__::string);
-<string>.+/(\"[[:blank:]]*\n) {	
-							begin(StartCondition__::INITIAL);	
-							return STRING;
-						}
+/* Through greedy matching until end of line, 
+   string concatenation is applied */
+\".+\"							return STRING; 
 
+{escapeSeq}						| 			
+{octal}							|				  
+{hexadecimal}					return CHARCONST; 
 
+{unaryOp}						|
+{relationalOp}					|
+{assignOp}						|
+{otherOp} 						return OPERATOR;
 
-{unaryOp}				|
-{relationalOp}			|
-{assignOp}				|
-{otherOp} 				return OPERATOR;
-[a-zA-Z_][a-zA-Z_0-9]* 	return IDENT;
-[0-9]+					return INTEGRAL;
-[0-9]+\.[0-9]+			return DOUBLE;
-'[^[:space:]]'			return matched()[1];
-\n$						|
-.		 				return matched()[0];
+{double}						|
+{eDouble}						return DOUBLE;
+
+{ident}							return IDENT;
+
+{int}							return INTEGRAL;
+
+.			 					return matched()[0];

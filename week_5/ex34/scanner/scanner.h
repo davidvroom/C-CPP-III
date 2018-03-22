@@ -27,8 +27,6 @@ class Scanner: public ScannerBase
 
         explicit Scanner(std::string const &file);   // toegevoegd
         
-        void finish();
-
         // $insert lexFunctionDecl
         int lex();
 
@@ -43,6 +41,8 @@ class Scanner: public ScannerBase
         void postCode(PostEnum__ type);    
                             // re-implement this function for code that must 
                             // be exec'ed after the rules's actions.
+
+        void finish();      // toegevoegd
 };
 
 // $insert scannerConstructors
@@ -51,7 +51,8 @@ inline Scanner::Scanner(std::istream &in, std::ostream &out)
     ScannerBase(in, out)
 {}
 
-inline Scanner::Scanner(std::string const &infile, std::string const &outfile)
+inline Scanner::Scanner(
+    std::string const &infile, std::string const &outfile)
 :
     ScannerBase(infile, outfile)
 {}
@@ -62,13 +63,14 @@ inline Scanner::Scanner(std::string const &file)
     ScannerBase(file, std::string{file} + ".tmp"),
     d_fileName(file),
     d_gslFileName(file.substr(0, file.find_last_of(".")) + ".gsl"),
-    d_gsl(file.substr(0, file.find_last_of(".")) + ".gsl")
+    d_gsl(d_gslFileName)
 {}
 
 inline void Scanner::finish()
 {
-    int rc = std::rename((d_fileName + ".tmp").c_str(), d_fileName.c_str());
-    if (rc)
+    int result = std::rename(
+        (d_fileName + ".tmp").c_str(), d_fileName.c_str());
+    if (result)
         throw std::runtime_error("Renaming temporary file failed");
 }
 

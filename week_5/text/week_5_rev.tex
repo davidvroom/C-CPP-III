@@ -1,0 +1,88 @@
+\documentclass[12pt]{article}
+\usepackage[left=1in, right=1in]{geometry}
+
+\usepackage{url}
+
+%\usepackage{arydshln}
+
+\usepackage{graphicx}
+
+\usepackage{color}
+\definecolor{light-gray}{gray}{0.30}
+
+\usepackage{verbatim}
+
+\usepackage{listings}
+\lstset{
+	frame=leftline,
+	frameround=ttff,
+	numbers=left,
+	language=C++,
+	showstringspaces=False,
+	extendedchars=False,
+	numberstyle=\footnotesize,
+	basicstyle=\small\ttfamily,
+	commentstyle=\color{light-gray}\slshape,
+	belowskip=1.5em,
+	aboveskip=1.5em,
+	fontadjust,
+	tabsize=4,		%added for proper tab alligning
+	xleftmargin=0cm,
+	xrightmargin=0cm
+}
+
+
+\newcommand{\desc}[1]{\textit{#1} \vspace{1em}}
+
+\title{\itshape Exercises week 5: Lexical Scanners - Revision}
+
+\author{
+	Klaas Isaac Bijlsma \\ s2394480
+	\and
+	David Vroom \\ s2309939
+}
+
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\section*{Exercise 32}
+\desc{Learn to perform a non-greedy match}
+
+\textbf{In onze eerste poging hebben we niet gebruik gemaakt van een mini-scanner om houseboat en household van de andere woorden te onderschijden. Nu wel.}\\
+\\
+De scanner print de langste aaneenschakeling van non-spaces, tenzij het woord begint met house en eindigt met house of boat, dan gaat de scanner de mini-scanner in. 
+
+\lstinputlisting[title=\texttt{lexer}]{../ex32/lexer}
+
+\clearpage
+
+\section*{Exercise 34}
+\desc{Learn to design a scanner scanning a piece of text}
+
+\textbf{In onze eerste poging werkte \texttt{<<EOF>>} niet. We zijn erachter gekomen waarom dit het geval was: de scanner strandde in de \texttt{eolComment} mini-scanner en keerde niet terug naar \texttt{INITIAL}. Nu werkt de code naar behoren.}\\
+\\
+Aan de scanner class hebben we een constructor toegevoegd, waaraan de naam van de te bewerken file mee kan worden gegeven, dit is de inputfile. Vervolgens wordt aan deze naam de extensie tmp toegevoegd, dit is de output file. Aan het einde van de bewerking wordt \texttt{finish} binnen lexer aangeroepen. De file met de extensie tmp krijgt de naam van de inputfile en vervangt hiermee deze file.  
+
+\lstinputlisting[title=\texttt{lexer}]{../ex34/lexer}
+\lstinputlisting[title=\texttt{scanner/scanner.h}]{../ex34/scanner/scanner.h}
+\lstinputlisting[title=\texttt{main.cc}]{../ex34/main.cc}
+
+\clearpage
+
+\section*{Exercise 35}
+\desc{Design a small tokenizer}
+
+\textbf{In onze eerste poging accepteerde onze lexer niet de juiste character constanten en werd een double met een e-operator niet herkend. Dit is opgelost. Daarbij hebben we de code opgeschoond en leesbaarder gemaakt.}
+
+\lstinputlisting[title=\texttt{lexer}]{../ex35/lexer}
+\lstinputlisting[title=\texttt{scanner/scanner.h}]{../ex35/scanner/scanner.h}
+\lstinputlisting[title=\texttt{main.cc}]{../ex35/main.cc}
+
+\clearpage
+
+
+
+
+\end{document}

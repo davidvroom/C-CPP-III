@@ -1,8 +1,8 @@
 input
 regel 2
-cout << grabbed(1, "input.gsl");
-cout << grabbed(2, "input.gsl");
-cout << grabbed(3, "input.gsl");
+cout << grabbed(1, grabbed(1, grabbed(1, grabbed(1, grabbed(1, grabbed(1, "input.gsl"))))));
+cout << grabbed(2, grabbed(2, grabbed(2, grabbed(2, grabbed(2, grabbed(2, "input.gsl"))))));
+cout << grabbed(3, grabbed(3, grabbed(3, grabbed(3, grabbed(3, grabbed(3, "input.gsl"))))));
 hierna is een eolcomment // hallo " dag \n en dan nu echtt
 hjgk /* dit is een 
 multiline comment " en dit is geen string"
