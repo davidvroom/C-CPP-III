@@ -1,0 +1,7 @@
+%filenames = "scanner"
+
+
+%%
+
+[[:alpha:]]+	return true; //Parser::WORD;
+.|\n 			// ignore
