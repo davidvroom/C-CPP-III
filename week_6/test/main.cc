@@ -2,7 +2,7 @@
 
 int main()
 {
-	Scanner scanner;
-	//Parser parser;
-	//parser.parse();
+	//Scanner scanner;
+	Parser parser;
+	return parser.parse();
 }

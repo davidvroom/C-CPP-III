@@ -1,0 +1,19 @@
+%target-directory parser
+%filenames parser 
+
+%scanner ../scanner/scanner.h 
+
+%left WORD
+
+%%
+list:
+	list WORD
+	{
+		std::cout << "list word recognized";
+	}	
+|
+	WORD
+	{
+		std::cout << "word recognized";
+	}	
+;

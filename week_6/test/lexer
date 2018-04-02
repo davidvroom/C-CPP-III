@@ -1,0 +1,7 @@
+%target-directory = "scanner"
+%filenames = "scanner"
+
+%%
+
+[[:alpha:]]+	return Parser::WORD;
+.|\n 			// ignore
