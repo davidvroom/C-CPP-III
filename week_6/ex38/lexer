@@ -1,0 +1,21 @@
+%target-directory = "scanner"
+%filenames scanner
+
+digits      [0-9]+
+optdigits   [0-9]*
+exp         [eE][-+]?{digits}
+
+%%
+
+[ \t\n]+								// ignore
+
+"write"									return Parser::WRITE;
+
+{digits}                                |
+{digits}"."{optdigits}{exp}?            |
+{optdigits}"."{digits}{exp}?            return Parser::NUMBER;
+
+[[:alpha:]_][[:alnum:]_]*               return Parser::IDENT;
+
+.                                    	return matched()[0];
+

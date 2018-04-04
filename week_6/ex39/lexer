@@ -1,0 +1,9 @@
+%target-directory = "scanner"
+%filenames scanner
+
+%%
+
+[ \t]+			// ignore
+
+[0-9]+			return Parser::NR;
+.|\n			return matched()[0];

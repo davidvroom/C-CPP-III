@@ -1,0 +1,33 @@
+%target-directory parser
+%filenames parser 
+%scanner ../scanner/scanner.h 
+
+%token VAR
+%token NR
+%left '+'
+%left '*'
+%right '-'
+
+%%
+
+expr:
+    token
+|
+    '-' expr
+|
+    expr '+' expr
+|
+    expr '*' expr
+;
+
+token:
+    token '[' NR_or_VAR ']'
+|
+    NR_or_VAR
+;
+
+NR_or_VAR:
+    NR
+|
+    VAR
+;

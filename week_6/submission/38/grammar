@@ -1,0 +1,34 @@
+%target-directory parser
+%filenames parser 
+%scanner ../scanner/scanner.h 
+
+%token WRITE 
+       IDENT
+       NUMBER
+
+%%
+
+writes:
+    writes write
+|
+    // empty
+;
+
+write:
+    WRITE '(' variable_list ')'
+    {
+        std::cout << "action\n";
+    }
+;
+
+variable_list:
+    variable_list ',' variableName
+|
+    variableName
+;
+
+variableName:
+    IDENT
+|
+    NUMBER
+;

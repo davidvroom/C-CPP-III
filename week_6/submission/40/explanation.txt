@@ -1,0 +1,5 @@
+There are two conflicts in the given grammar. The first is a reduce/reduce conflict, because the token NUMBER can be reduced to both the nonterminal 'number' and consequently 'expr', and 'expr'. Since this is redundant, bisonc++ drops one of the two rules. This is also our solution to this conflict, which is shown in grammar1. 
+
+The other conflict is a shift/reduce conflict. According to the current grammar, in some cases it would be allowed to reduce, or to shift. However, these possibilities give different results. Therefore it is a problem that bisonc++ does not know what is intended. Bisonc++ solves it by chosing to shift. Since this is in general not desired when performing calcultions, we chose to reduce in such a case by specifying a left association for the operators as shown in grammar1. 
+
+In grammar2 we show how bisonc++ would solve both conflicts.
