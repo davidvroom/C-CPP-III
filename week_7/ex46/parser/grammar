@@ -1,0 +1,210 @@
+%class-name Parser
+
+%filenames parser
+%parsefun-source parse.cc
+
+%baseclass-preinclude rulevalue.h
+%stype RuleValue
+
+%scanner ../scanner/scanner.h
+
+%token  NUMBER
+        IDENT
+        STOP
+        LIST
+
+%right  '=' 
+        ADDASSIGN 
+        SUBASSIGN
+        MULASSIGN
+        DIVASSIGN
+        MODASSIGN
+        LSHIFTASSIGN
+        RSHIFTASSIGN
+        ANDASSIGN
+        XORASSIGN
+        ORASSIGN   
+
+%left   '|'
+%left   '^'
+%left   '&'
+
+%left   LSHIFT
+        RSHIFT
+
+%left   '+' '-'
+%left   '*' '/' '%'
+%right  uMinus '~'
+
+// %debug
+
+%%
+
+lines:
+    lines line
+|
+    line
+;
+
+
+line:
+    expr '\n'
+    {
+        display($1);
+    }
+|
+    error '\n'    
+    {
+        prompt();
+    }
+|
+    '\n'
+    {
+        prompt();
+    }
+|
+    LIST '\n'
+    {
+        showList();
+    }
+;
+
+
+expr:
+    NUMBER
+    {
+        $$ = value();
+    }
+|
+    IDENT
+    {
+        $$ = variable();
+    }
+|
+    STOP
+    {
+        terminate();
+    }
+|
+    '-' expr            %prec uMinus
+    {
+        $$ = negate($2);
+    }
+|
+    expr '+' expr
+    {
+        $$ = add($1, $3);
+    }    
+|
+    expr '-' expr
+    {
+        $$ = sub($1, $3);
+
+    }    
+|
+    expr '*' expr
+    {
+        $$ = mul($1, $3);
+    }
+|
+    expr '/' expr
+    {
+        $$ = div($1, $3);
+    }
+|
+    '(' expr ')'
+    {
+        $$ = $2;
+    }
+|
+    expr '=' expr
+    {
+        $$ = assign($1, $3);
+    }
+|
+    expr ADDASSIGN expr
+    {
+        $$ = addAssign($1, $3);
+    }
+|
+    expr SUBASSIGN expr
+    {
+        $$ = subAssign($1, $3);    
+    }
+|
+    expr MULASSIGN expr
+    {
+        $$ = mulAssign($1, $3);    
+    }
+|
+    expr DIVASSIGN expr
+    {
+        $$ = divAssign($1, $3);
+    }
+| 
+    expr '%' expr
+    {
+        $$ = mod($1, $3);
+    }
+|
+    expr LSHIFT expr
+    {
+        $$ = lShift($1, $3);
+    }
+|
+    expr RSHIFT expr
+    {
+        $$ = rShift($1, $3);
+    }
+| 
+    expr '&' expr
+    {
+        $$ = bwAnd($1, $3);
+    }
+|
+    expr '|' expr
+    {
+        $$ = bwOr($1, $3);
+    }
+| 
+    expr '^' expr
+    {
+        $$ = bwXOr($1, $3);
+    }
+|
+    '~' expr
+    {
+        $$ = bwNot($2);
+    }
+|
+    expr MODASSIGN expr
+    {
+        $$ = modAssign($1, $3);
+    }
+|
+    expr LSHIFTASSIGN expr
+    {
+        $$ = lShiftAssign($1, $3);
+    }
+|
+    expr RSHIFTASSIGN expr
+    {
+        $$ = rShiftAssign($1, $3);
+    }
+|
+    expr ANDASSIGN expr
+    {
+        $$ = andAssign($1, $3);
+    }
+|
+    expr XORASSIGN expr
+    {
+        $$ = xOrAssign($1, $3);
+    }
+|
+    expr ORASSIGN expr
+    {
+        $$ = orAssign($1, $3);
+    }
+;
+
