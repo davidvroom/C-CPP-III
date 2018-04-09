@@ -1,0 +1,1 @@
+In this exercise we added all the standard arithmetic operators. The exercise didn't ask to submit the implementation, but still we submit parser.h and one implementation of each set of similar functions, for feedback. Because many functions were very similar, we were thinking of templates, but didn't use it in the end. Do you recommend this?

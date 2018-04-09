@@ -1,0 +1,173 @@
+%target-directory parser
+%class-name Parser
+%filenames parser
+%parsefun-source parse.cc
+
+%baseclass-preinclude rulevalue.h
+%stype RuleValue
+
+%scanner ../scanner/scanner.h
+
+%token  NUMBER 
+        IDENT
+        EXP
+        LN
+        SIN
+        ASIN
+        COS
+        ACOS
+        TAN
+        ATAN
+        SQRT
+        ABS
+        EULER
+        PI
+        RAD
+        DEG
+        GRAD
+
+%right  '='
+%left   '+' '-'
+%right  uMinus
+
+// %debug
+
+%%
+
+lines:
+    lines line
+|
+    line
+;
+
+
+line:
+    expr '\n'
+    {
+        display($1);
+    }
+|
+    error '\n'    
+    {
+        prompt();
+    }
+|
+    '\n'
+    {
+        prompt();
+    }
+|
+    RAD '\n'
+    {
+        setRad();
+    }
+|
+    DEG '\n'
+    {
+        setDeg();
+    }
+|
+    GRAD '\n'
+    {
+        setGrad();
+    }
+;
+
+
+expr:
+    NUMBER
+    {
+        $$ = value();
+    }
+|
+    EULER
+    {
+        $$ = setValue(2.71828182845904523536);
+    }
+|
+    PI
+    {
+        $$ = setValue(3.14159265358979323846);
+    }
+|
+    IDENT
+    {
+        $$ = variable();
+    }
+|
+    '-' expr            %prec uMinus
+    {
+        $$ = negate($2);
+    }
+|
+    expr '+' expr
+    {
+        $$ = add($1, $3);
+    }    
+|
+    expr '-' expr
+    {
+        $$ = sub($1, $3);
+
+    }    
+|
+    '(' expr ')'
+    {
+        $$ = $2;
+    }
+|
+    expr '=' expr
+    {
+        $$ = assign($1, $3);
+    }
+|
+    EXP '(' expr ')'
+    {
+        $$ = exp_($3);
+    }
+|
+    LN '(' expr ')'
+    {
+        $$ = ln_($3);
+    }
+|
+    SIN '(' expr ')'
+    {
+        $$ = sin_($3);
+    }
+|
+    ASIN '(' expr ')'
+    {
+        $$ = asin_($3);
+    }
+|
+    COS '(' expr ')'
+    {
+        $$ = cos_($3);
+    }
+|
+    ACOS '(' expr ')'
+    {
+        $$ = acos_($3);
+    }
+|
+    TAN '(' expr ')'
+    {
+        $$ = tan_($3);
+    }
+|
+    ATAN '(' expr ')'
+    {
+        $$ = atan_($3);
+    }
+|
+    SQRT '(' expr ')'
+    {
+        $$ = sqrt_($3);
+    }
+|
+    ABS '(' expr ')'
+    {
+        $$ = abs_($3);
+    }
+;

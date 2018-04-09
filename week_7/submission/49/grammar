@@ -1,0 +1,71 @@
+%target-directory parser
+%class-name Parser
+%filenames parser
+%parsefun-source parse.cc
+%scanner ../scanner/scanner.h
+
+%polymorphic INT: int; STRING: std::string; DOUBLE: double;
+%type <INT>     int
+%type <STRING>  string
+%type <DOUBLE>  double
+%type <STYPE__> combi
+
+%token INT STRING DOUBLE QUIT
+
+%%
+
+lines:
+    lines '\n' line
+|
+    line
+;
+
+line:
+    combi
+    {
+        process($1);
+    }
+| 
+    QUIT
+    {
+        quit();
+    }
+;
+
+combi:
+    int
+    {
+        $$ = $1;
+    }
+|
+    string
+    {
+        $$ = $1;
+    }
+|
+    double
+    {
+        $$ = $1;
+    }
+;
+
+int:
+    INT
+    {
+        $$ = stoi(d_scanner.matched());
+    }
+;
+
+string:
+    STRING
+    {
+        $$ = d_scanner.matched();
+    }
+;
+
+double:
+    DOUBLE 
+    {
+        $$ = stod(d_scanner.matched());
+    }
+;

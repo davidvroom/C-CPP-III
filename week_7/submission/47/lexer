@@ -1,0 +1,12 @@
+%target-directory = "scanner"
+%filenames scanner
+%interactive
+
+%%
+
+[ \t]+            // ignore blanks
+[()]              // ignore parentheses
+
+[0-9]+            return Parser::NUMBER;
+
+.|\n              return matched()[0];
