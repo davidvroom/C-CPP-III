@@ -56,32 +56,10 @@ class Parser: public ParserBase
         RuleValue value();
         RuleValue variable();
 
-        RuleValue &assign(RuleValue &lvalue, RuleValue &rvalue);    
-        RuleValue &negate(RuleValue &e);
-
-        RuleValue &add(RuleValue &lvalue, RuleValue &rvalue);
-        RuleValue &sub(RuleValue &lvalue, RuleValue &rvalue);
-        RuleValue &mul(RuleValue &lvalue, RuleValue &rvalue);   // added
-        RuleValue &div(RuleValue &lvalue, RuleValue &rvalue);   // added
-
-        RuleValue &addAssign(RuleValue &lvalue, RuleValue &rvalue); // added
-        RuleValue &subAssign(RuleValue &lvalue, RuleValue &rvalue);
-        RuleValue &mulAssign(RuleValue &lvalue, RuleValue &rvalue);
-        RuleValue &divAssign(RuleValue &lvalue, RuleValue &rvalue);
-
-        RuleValue &mod(RuleValue &lvalue, RuleValue &rvalue);
-        RuleValue &lShift(RuleValue &lvalue, RuleValue &rvalue);
-        RuleValue &rShift(RuleValue &lvalue, RuleValue &rvalue);
-        RuleValue &bwOr(RuleValue &lvalue, RuleValue &rvalue);
-        RuleValue &bwAnd(RuleValue &lvalue, RuleValue &rvalue);
-        RuleValue &bwXOr(RuleValue &lvalue, RuleValue &rvalue);
-        RuleValue &bwNot(RuleValue &lvalue);
-        RuleValue &modAssign(RuleValue &lvalue, RuleValue &rvalue);
-        RuleValue &lShiftAssign(RuleValue &lvalue, RuleValue &rvalue);
-        RuleValue &rShiftAssign(RuleValue &lvalue, RuleValue &rvalue);
-        RuleValue &andAssign(RuleValue &lvalue, RuleValue &rvalue);
-        RuleValue &xOrAssign(RuleValue &lvalue, RuleValue &rvalue);
-        RuleValue &orAssign(RuleValue &lvalue, RuleValue &rvalue);
+        RuleValue assign(RuleValue &lvalue, RuleValue &rvalue);    
+        RuleValue binaryOp(RuleValue &lvalue, char const binaryOp, RuleValue &rvalue);
+        RuleValue compAssign(RuleValue &lvalue, char const binaryOp, RuleValue &rvalue);
+        RuleValue unaryOp(char const unaryOp, RuleValue &value);
 
         double valueOf(RuleValue const &e);
 };
