@@ -6,7 +6,6 @@
 #include "parser.h"
 
 #include <iostream>
-#include <cmath>		// added
 
 // $insert lex
 inline int Parser::lex()

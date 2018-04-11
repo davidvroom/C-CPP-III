@@ -5,11 +5,13 @@
 
 // $insert baseclass_h
 #include "scannerbase.h"
-
+#include "../functionmap/functionmap.h"
 
 // $insert classHead
 class Scanner: public ScannerBase
 {
+    FunctionMap d_functionMap;
+
     public:
         explicit Scanner(std::istream &in = std::cin,
                                 std::ostream &out = std::cout);
@@ -28,6 +30,7 @@ class Scanner: public ScannerBase
         void postCode(PostEnum__ type);    
                             // re-implement this function for code that must 
                             // be exec'ed after the rules's actions.
+
 };
 
 // $insert scannerConstructors

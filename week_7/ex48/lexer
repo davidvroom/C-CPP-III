@@ -14,17 +14,6 @@ exp         [eE][-+]?{digits}
 {digits}"."{optdigits}{exp}?            |
 {optdigits}"."{digits}{exp}?            return Parser::NUMBER;
 
-"exp"									return Parser::EXP;
-"ln"									return Parser::LN;
-"sin"									return Parser::SIN;
-"asin"									return Parser::ASIN;
-"cos"									return Parser::COS;
-"acos"									return Parser::ACOS;
-"tan"									return Parser::TAN;
-"atan"									return Parser::ATAN;
-"sqrt"									return Parser::SQRT;
-"abs"									return Parser::ABS;
-
 'e'										return Parser::EULER;
 "pi"									return Parser::PI;
 
@@ -32,7 +21,11 @@ exp         [eE][-+]?{digits}
 "deg"									return Parser::DEG;
 "grad"									return Parser::GRAD;
 
-
-[[:alpha:]_][[:alnum:]_]*               return Parser::IDENT;
-
+[[:alpha:]_][[:alnum:]_]*               {
+											if (d_functionMap.find(matched()) ==  d_functionMap.end())
+												return Parser::IDENT;
+											else
+												return Parser::FUNCTION;
+										}
+									
 \n|.                                    return matched()[0];

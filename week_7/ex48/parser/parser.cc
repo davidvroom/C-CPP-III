@@ -5,7 +5,7 @@ Parser::Parser(bool run)
     d_display(true)
 {
     setDebug(false);
-
+    
     if (run)
         prompt();
     else

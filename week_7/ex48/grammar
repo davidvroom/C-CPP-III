@@ -4,27 +4,22 @@
 %parsefun-source parse.cc
 
 %baseclass-preinclude rulevalue.h
-%stype RuleValue
+//%stype RuleValue
+
+%polymorphic RULEVALUE: RuleValue; FUNC: std::string;
+%type <RULEVALUE>   expr
+%type <FUNC>        function
 
 %scanner ../scanner/scanner.h
 
 %token  NUMBER 
         IDENT
-        EXP
-        LN
-        SIN
-        ASIN
-        COS
-        ACOS
-        TAN
-        ATAN
-        SQRT
-        ABS
         EULER
         PI
         RAD
         DEG
         GRAD
+        FUNCTION
 
 %right  '='
 %left   '+' '-'
@@ -121,53 +116,15 @@ expr:
         $$ = assign($1, $3);
     }
 |
-    EXP '(' expr ')'
+    function '(' expr ')'
     {
-        $$ = exp_($3);
+        $$ = callFunction($1, $3);
     }
-|
-    LN '(' expr ')'
+;
+
+function:
+    FUNCTION
     {
-        $$ = ln_($3);
-    }
-|
-    SIN '(' expr ')'
-    {
-        $$ = sin_($3);
-    }
-|
-    ASIN '(' expr ')'
-    {
-        $$ = asin_($3);
-    }
-|
-    COS '(' expr ')'
-    {
-        $$ = cos_($3);
-    }
-|
-    ACOS '(' expr ')'
-    {
-        $$ = acos_($3);
-    }
-|
-    TAN '(' expr ')'
-    {
-        $$ = tan_($3);
-    }
-|
-    ATAN '(' expr ')'
-    {
-        $$ = atan_($3);
-    }
-|
-    SQRT '(' expr ')'
-    {
-        $$ = sqrt_($3);
-    }
-|
-    ABS '(' expr ')'
-    {
-        $$ = abs_($3);
+        $$ = d_scanner.matched();
     }
 ;

@@ -11,6 +11,7 @@
 #include <vector>
 #include <unordered_map>
 #include <string>
+#include "../functionmap/functionmap.h"
 
 #undef Parser
 class Parser: public ParserBase
@@ -21,6 +22,8 @@ class Parser: public ParserBase
         DEG,
         GRAD
     };
+
+    FunctionMap d_functionMap;
 
     size_t d_angle = RAD;
     // $insert scannerobject
@@ -44,6 +47,8 @@ class Parser: public ParserBase
                                         // lexical scanner. 
         void print();                   // use, e.g., d_token, d_loc
 
+        RuleValue callFunction(std::string const &str, RuleValue &value);
+
     // support functions for parse():
         void executeAction__(int ruleNr);       // added __
         void errorRecovery__();                 // added __
@@ -61,24 +66,13 @@ class Parser: public ParserBase
         void done();
         void prompt();
 
-        RuleValue &add(RuleValue &lvalue, RuleValue &rvalue);
-        RuleValue &assign(RuleValue &lvalue, RuleValue &rvalue);
-        RuleValue &negate(RuleValue &e);
+        RuleValue add(RuleValue &lvalue, RuleValue &rvalue);
+        RuleValue assign(RuleValue &lvalue, RuleValue &rvalue);
+        RuleValue negate(RuleValue &e);
         RuleValue setValue(double const arg);  //added
-        RuleValue &sub(RuleValue &lvalue, RuleValue &rvalue);
+        RuleValue sub(RuleValue &lvalue, RuleValue &rvalue);
         RuleValue value();
         RuleValue variable();
-
-        RuleValue &exp_(RuleValue &e);   
-        RuleValue &ln_(RuleValue &e);
-        RuleValue &sin_(RuleValue &e);
-        RuleValue &asin_(RuleValue &e);
-        RuleValue &cos_(RuleValue &e);
-        RuleValue &acos_(RuleValue &e);
-        RuleValue &tan_(RuleValue &e);
-        RuleValue &atan_(RuleValue &e);
-        RuleValue &sqrt_(RuleValue &e);
-        RuleValue &abs_(RuleValue &e);
 
         void setRad();
         void setDeg();
